@@ -18,8 +18,8 @@ public class TodoResource {
 
     @Operation(summary = "Find todo for id")
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Todo> findById(@PathVariable(value = "id") Integer id) {
-        Todo todo = service.findById(id);
+    public ResponseEntity<Object> findById(@PathVariable(value = "id") Integer id) {
+        var todo =  service.findById(id);
         return (todo != null) ? ResponseEntity.ok().body(todo) : ResponseEntity.notFound().build();
     }
 }
