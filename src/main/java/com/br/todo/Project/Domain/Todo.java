@@ -18,10 +18,10 @@ public class Todo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String titulo;
-    private String descricao;
-    private LocalDateTime dataFinalizacao;
-    private Boolean finalizado = false;
+    private String title;
+    private String description;
+    private LocalDateTime completionDate;
+    private Boolean completed = false;
 
 
 }

@@ -23,9 +23,6 @@ public class ProjectTodoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-		Todo t1 = new Todo(null, "estudar", "Estudar Spring/Angular", LocalDateTime.parse("31/01/2024 23:25", formatter), false);
-		todoRepository.saveAll(Arrays.asList(t1));
 	}
 
 	/*documentaçao SWAGGER*/
