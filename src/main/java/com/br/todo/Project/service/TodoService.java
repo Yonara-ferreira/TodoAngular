@@ -7,6 +7,8 @@ import com.br.todo.Project.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TodoService {
 
@@ -18,5 +20,21 @@ public class TodoService {
         return new TodoListingData(todos);
 
     }
+
+    public List<TodoListingData> findAllOpen(){
+        return respository.findAllOpen()
+                .stream()
+                .map(TodoListingData::new)
+                .toList();
+    }
+
+    public List<TodoListingData> findAllClose(){
+        return respository.findAllClose()
+                .stream()
+                .map(TodoListingData::new)
+                .toList();
+    }
+
+
 
 }
