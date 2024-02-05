@@ -1,15 +1,15 @@
 package com.br.todo.Project.resource;
 
 
+import com.br.todo.Project.Domain.DTO.TodoCreatingData;
 import com.br.todo.Project.Domain.DTO.TodoListingData;
+import com.br.todo.Project.Domain.Todo;
 import com.br.todo.Project.service.TodoService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +36,17 @@ public class TodoResource {
     public ResponseEntity<List<TodoListingData>> listClose(){
         List<TodoListingData> findTodo = service.findAllClose();
         return ResponseEntity.ok().body(findTodo);
+    }
+    @Operation(summary = "List all todo")
+    @GetMapping(value = "/todo")
+    public ResponseEntity<List<TodoListingData>> listAll(){
+        List<TodoListingData> listAll = service.findAll();
+        return (listAll != null) ? ResponseEntity.ok().body(listAll) : ResponseEntity.badRequest().build();
+    }
+    @Operation(summary = "Created new todo")
+    @PostMapping(value = "/create")
+    public ResponseEntity<TodoCreatingData> Create(@RequestBody TodoCreatingData todo,  @RequestParam(required = false) Integer id){
+        TodoCreatingData createdTodo = service.create(todo, id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
     }
 }

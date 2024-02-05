@@ -1,5 +1,6 @@
 package com.br.todo.Project.Domain;
 
+import com.br.todo.Project.Domain.DTO.TodoCreatingData;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,4 +25,12 @@ public class Todo implements Serializable {
     private Boolean completed = false;
 
 
+    public Todo(TodoCreatingData todoCreatingData) {
+        this.id = todoCreatingData.id();
+        this.title = todoCreatingData.title();
+        this.description = todoCreatingData.description();
+        this.completionDate = todoCreatingData.completionDate();
+        this.completed = todoCreatingData.completed();
+
+    }
 }
