@@ -29,7 +29,7 @@ public class Todo implements Serializable {
         this.id = todoCreatingData.id();
         this.title = todoCreatingData.title();
         this.description = todoCreatingData.description();
-        this.completionDate = todoCreatingData.completionDate();
+        this.completionDate = LocalDateTime.now().withSecond(0).withNano(0);
         this.completed = todoCreatingData.completed();
 
     }
