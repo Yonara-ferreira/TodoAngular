@@ -49,4 +49,11 @@ public class TodoResource {
         TodoCreatingData createdTodo = service.create(todo, id);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
     }
+
+    @Operation(summary = "Delete todo")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> DeleteTodo(@PathVariable(value = "id") Integer id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
