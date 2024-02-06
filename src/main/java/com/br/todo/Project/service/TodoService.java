@@ -2,6 +2,7 @@ package com.br.todo.Project.service;
 
 import com.br.todo.Project.Domain.DTO.TodoCreatingData;
 import com.br.todo.Project.Domain.DTO.TodoListingData;
+import com.br.todo.Project.Domain.DTO.TodoUpdateData;
 import com.br.todo.Project.Domain.Todo;
 import com.br.todo.Project.Exception.RequestNotFoundException;
 import com.br.todo.Project.repository.TodoRepository;
@@ -54,9 +55,20 @@ public class TodoService {
         }else{
             throw new RuntimeException();
         }
-
     }
     public void delete(Integer id) {
         repository.deleteById(id);
     }
+
+    public TodoListingData update(TodoUpdateData todoUpdateData, Integer id) {
+        try{
+            Todo todo = repository.getReferenceById(id);
+            todo.setTitle(todoUpdateData.title());
+            todo = repository.save(todo);
+            return new TodoListingData(todo);
+        }catch (RequestNotFoundException e){
+            throw new RequestNotFoundException("id not found " + id);
+        }
+    }
+
 }

@@ -3,6 +3,7 @@ package com.br.todo.Project.resource;
 
 import com.br.todo.Project.Domain.DTO.TodoCreatingData;
 import com.br.todo.Project.Domain.DTO.TodoListingData;
+import com.br.todo.Project.Domain.DTO.TodoUpdateData;
 import com.br.todo.Project.Domain.Todo;
 import com.br.todo.Project.service.TodoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -55,5 +56,12 @@ public class TodoResource {
     public ResponseEntity<Void> DeleteTodo(@PathVariable(value = "id") Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    @Operation(summary = "Update todo")
+    @PutMapping("/{id}")
+    public ResponseEntity<TodoListingData> UpdateTodo(@RequestBody TodoUpdateData todo, @PathVariable(value = "id") Integer id){
+        TodoListingData newObj = service.update(todo, id);
+        return ResponseEntity.ok().body(newObj);
+
     }
 }
