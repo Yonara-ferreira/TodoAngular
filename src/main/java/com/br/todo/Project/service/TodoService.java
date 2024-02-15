@@ -19,9 +19,8 @@ public class TodoService {
     private TodoRepository repository;
 
     public Object findById(Integer id) {
-        Todo todos = repository.findById(id).orElseThrow(() -> new RequestNotFoundException("Todo not found for:" + id + ", type: " + Todo.class.getName()));
+        Todo todos = repository.findById(id).orElseThrow(() -> new RequestNotFoundException("Todo not found for: " + id + ", type: " + Todo.class.getName()));
         return new TodoListingData(todos);
-
     }
 
     public List<TodoListingData> findAllOpen(){

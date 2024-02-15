@@ -1,6 +1,7 @@
 package com.br.todo.Project.Domain;
 
 import com.br.todo.Project.Domain.DTO.TodoCreatingData;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,7 +11,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +23,8 @@ public class Todo implements Serializable {
     private Integer id;
     private String title;
     private String description;
-    private LocalDateTime completionDate;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date completionDate;
     private Boolean completed = false;
 
 
@@ -29,7 +32,7 @@ public class Todo implements Serializable {
         this.id = todoCreatingData.id();
         this.title = todoCreatingData.title();
         this.description = todoCreatingData.description();
-        this.completionDate = LocalDateTime.now().withSecond(0).withNano(0);
+        this.completionDate = todoCreatingData.completionDate();
         this.completed = todoCreatingData.completed();
 
     }

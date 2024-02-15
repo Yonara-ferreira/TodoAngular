@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import java.text.ParseException;
+
 @Configuration
 @Profile("test")
 public class testConfig {
@@ -17,7 +19,7 @@ public class testConfig {
     //  ativo o mesmo possa ser instanciado com a base de dados;
 
     @Bean
-    public  boolean instancia(){
+    public  boolean instancia() throws ParseException {
         this.dBservice.instantiateDatabase();
         return true;
     }

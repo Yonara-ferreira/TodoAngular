@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping(value = "/todos")
 public class TodoResource {
     @Autowired
@@ -62,6 +63,5 @@ public class TodoResource {
     public ResponseEntity<TodoListingData> UpdateTodo(@RequestBody TodoUpdateData todo, @PathVariable(value = "id") Integer id){
         TodoListingData newObj = service.update(todo, id);
         return ResponseEntity.ok().body(newObj);
-
     }
 }
