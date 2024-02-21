@@ -18,8 +18,9 @@ public class TodoService {
     @Autowired
     private TodoRepository repository;
 
-    public Object findById(Integer id) {
-        Todo todos = repository.findById(id).orElseThrow(() -> new RequestNotFoundException("Todo not found for: " + id + ", type: " + Todo.class.getName()));
+    public TodoListingData findById(Integer id) {
+        Todo todos = repository.findById(id).orElseThrow(() ->
+                new RequestNotFoundException("Todo not found for: " + id + ", type: " + Todo.class.getName()));
         return new TodoListingData(todos);
     }
 
@@ -69,5 +70,47 @@ public class TodoService {
             throw new RequestNotFoundException("id not found " + id);
         }
     }
+
+    /*@Autowired
+    private TodoRepository repository;
+
+    public Todo findById(Integer id) {
+        Optional<Todo> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new RequestNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + Todo.class.getName()));
+    }
+
+    public List<Todo> findAllOpen() {
+        List<Todo> list = repository.findAllOpen();
+        return list;
+    }
+
+    public List<Todo> findAllClose() {
+        List<Todo> list = repository.findAllClose();
+        return list;
+    }
+
+    public List<Todo> findAll() {
+        List<Todo> list = repository.findAll();
+        return list;
+    }
+
+    public Todo create(Todo obj) {
+        obj.setId(null);
+        return repository.save(obj);
+    }
+
+    public void delete(Integer id) {
+        repository.deleteById(id);
+    }
+
+    public Todo update(Integer id, Todo obj) {
+        Todo newObj = findById(id);
+        newObj.setTitle(obj.getTitle());
+        newObj.setCompletionDate(obj.getCompletionDate());
+        newObj.setDescription(obj.getDescription());
+        newObj.setCompleted(obj.getCompleted());
+        return repository.save(newObj);
+    }*/
 
 }
