@@ -1,6 +1,7 @@
 package com.br.todo.Project.Domain;
 
 import com.br.todo.Project.Domain.DTO.TodoCreatingData;
+import com.br.todo.Project.Domain.DTO.TodoUpdateData;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,5 +36,12 @@ public class Todo implements Serializable {
         this.completionDate = todoCreatingData.completionDate();
         this.completed = todoCreatingData.completed();
 
+    }
+
+    public Todo(TodoUpdateData todoUpdateData){
+        this.id = todoUpdateData.id();
+        this.title = todoUpdateData.title();
+        this.description = todoUpdateData.description();
+        this.completed = todoUpdateData.completed();
     }
 }
