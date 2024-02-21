@@ -62,54 +62,9 @@ public class TodoResource {
     }
     @Operation(summary = "Update todo")
     @PutMapping("/{id}")
-    public ResponseEntity<TodoListingData> UpdateTodo(@RequestBody TodoUpdateData todo, @PathVariable(value = "id") Integer id){
-        TodoListingData newObj = service.update(todo, id);
+    public ResponseEntity<TodoListingData> UpdateTodo(@PathVariable(value = "id") Integer id,@RequestBody TodoUpdateData todo){
+        TodoListingData newObj = service.update(id, todo);
         return ResponseEntity.ok().body(newObj);
     }
-/*    @Autowired*/
-    /*private TodoService service;
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Todo> findById(@PathVariable Integer id) {
-        Todo obj = service.findById(id);
-        return ResponseEntity.ok().body(obj);
-    }
-
-    @GetMapping(value = "/open")
-    public ResponseEntity<List<Todo>> listOpen() {
-        List<Todo> list = service.findAllOpen();
-        return ResponseEntity.ok().body(list);
-    }
-
-    @GetMapping(value = "/close")
-    public ResponseEntity<List<Todo>> listClose() {
-        List<Todo> list = service.findAllClose();
-        return ResponseEntity.ok().body(list);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Todo>> listAll() {
-        List<Todo> list = service.findAll();
-        return ResponseEntity.ok().body(list);
-    }
-
-    @PostMapping
-    public ResponseEntity<Todo> create(@RequestBody Todo obj) {
-        obj = service.create(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Todo> update(@PathVariable Integer id, @RequestBody Todo obj) {
-        Todo newObj = service.update(id, obj);
-        return ResponseEntity.ok().body(newObj);
-    }
-*/
 }

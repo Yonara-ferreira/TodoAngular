@@ -60,10 +60,12 @@ public class TodoService {
         repository.deleteById(id);
     }
 
-    public TodoListingData update(TodoUpdateData todoUpdateData, Integer id) {
+    public TodoListingData update(Integer id,TodoUpdateData todoUpdateData) {
         try{
             Todo todo = repository.getReferenceById(id);
             todo.setTitle(todoUpdateData.title());
+            todo.setCompleted(todoUpdateData.completed());
+            todo.setDescription(todoUpdateData.description());
             todo = repository.save(todo);
             return new TodoListingData(todo);
         }catch (RequestNotFoundException e){
@@ -71,46 +73,5 @@ public class TodoService {
         }
     }
 
-    /*@Autowired
-    private TodoRepository repository;
-
-    public Todo findById(Integer id) {
-        Optional<Todo> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new RequestNotFoundException(
-                "Objeto não encontrado! Id: " + id + ", Tipo: " + Todo.class.getName()));
-    }
-
-    public List<Todo> findAllOpen() {
-        List<Todo> list = repository.findAllOpen();
-        return list;
-    }
-
-    public List<Todo> findAllClose() {
-        List<Todo> list = repository.findAllClose();
-        return list;
-    }
-
-    public List<Todo> findAll() {
-        List<Todo> list = repository.findAll();
-        return list;
-    }
-
-    public Todo create(Todo obj) {
-        obj.setId(null);
-        return repository.save(obj);
-    }
-
-    public void delete(Integer id) {
-        repository.deleteById(id);
-    }
-
-    public Todo update(Integer id, Todo obj) {
-        Todo newObj = findById(id);
-        newObj.setTitle(obj.getTitle());
-        newObj.setCompletionDate(obj.getCompletionDate());
-        newObj.setDescription(obj.getDescription());
-        newObj.setCompleted(obj.getCompleted());
-        return repository.save(newObj);
-    }*/
 
 }
